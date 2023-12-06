@@ -1,23 +1,49 @@
 const drawPad = document.getElementById("draw-pad");
+let drawOption = '';
+let cellNumber = 16;
 
 document.addEventListener('DOMContentLoaded', function () {
     createDrawPad(16);
     const scroller = document.getElementById('scroller');
-    const selectedValue = document.getElementById('grid-resolution');
+    const gridResolution = document.getElementById('grid-resolution');
 
     // Initial update
-    selectedValue.innerText = `Selected Value: ${scroller.value}`;
+    gridResolution.innerText = `Selected Value: ${scroller.value}`;
 
     // Event listener for scroller change
     scroller.addEventListener('input', function () {
-        const value = scroller.value;
-        selectedValue.innerText = `Selected Value: ${value}`;
+        cellNumber = scroller.value;
+        gridResolution.innerText = `Selected Value: ${cellNumber}`;
         while(drawPad.firstChild) {
             drawPad.removeChild(drawPad.firstChild);
         }
-        createDrawPad(value);
+        createDrawPad(cellNumber);
         // You can use the 'value' variable for further processing or sending it to a server.
     });
+
+    document.getElementById('pencil').addEventListener('click', () => {
+        drawOption = 'pencil';
+        while(drawPad.firstChild) {
+            drawPad.removeChild(drawPad.firstChild);
+        }
+        createDrawPad(cellNumber);
+    });
+
+    document.getElementById('rainbow').addEventListener('click', () => {
+        drawOption = 'rainbow';
+        while(drawPad.firstChild) {
+            drawPad.removeChild(drawPad.firstChild);
+        }
+        createDrawPad(cellNumber);
+    });
+
+    document.getElementById('erase').addEventListener('click', () => {
+        while(drawPad.firstChild) {
+            drawPad.removeChild(drawPad.firstChild);
+        }
+        createDrawPad(cellNumber);
+    });
+
 });
 
 
@@ -44,8 +70,24 @@ function createCell(gridWidth) {
     newCell.className = 'cell';
     newCell.style.width = `${gridWidth}px`;
     newCell.style.height = `${gridWidth}px`;
-    newCell.addEventListener('mouseout', () => {
-        newCell.style.backgroundColor = 'black';
+    newCell.addEventListener('mouseover', () => {
+        switch(drawOption) {
+            case 'pencil':
+                newCell.style.backgroundColor = 'black';
+                break;
+            case 'rainbow':
+                newCell.style.background = (() => {
+                    const red = Math.floor(Math.random() * 256);
+                    const green = Math.floor(Math.random() * 256);
+                    const blue = Math.floor(Math.random() * 256);
+                    return `rgb(${red}, ${green}, ${blue})`;
+                })();
+                break;
+            default:
+                newCell.style.backgroundColor = 'black';
+                break;
+        }
+        
     });
     return newCell;
 }
