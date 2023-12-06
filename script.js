@@ -18,6 +18,9 @@ function createDrawGrid(dynamicWidth) {
             newCell.className = 'cell';
             newCell.style.width = `${gridWidth}px`;
             newCell.style.height = `${gridWidth}px`;
+            newCell.addEventListener('mouseout', ()=> {
+                newCell.style.backgroundColor = 'black';
+            });
             newRow.appendChild(newCell);
         }
         drawPad.appendChild(newRow);
