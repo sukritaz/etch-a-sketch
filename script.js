@@ -37,11 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
         createDrawPad(cellNumber);
     });
 
-    document.getElementById('erase').addEventListener('click', () => {
+    document.getElementById('clear').addEventListener('click', () => {
         while(drawPad.firstChild) {
             drawPad.removeChild(drawPad.firstChild);
         }
         createDrawPad(cellNumber);
+    });
+    document.getElementById('erase').addEventListener('click', () => {
+        drawOption = 'erase';
     });
 
 });
@@ -82,6 +85,9 @@ function createCell(gridWidth) {
                     const blue = Math.floor(Math.random() * 256);
                     return `rgb(${red}, ${green}, ${blue})`;
                 })();
+                break;
+            case 'erase':
+                newCell.style.backgroundColor = 'white';
                 break;
             default:
                 newCell.style.backgroundColor = 'black';
