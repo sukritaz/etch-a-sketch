@@ -87,7 +87,7 @@ function createCell(gridWidth) {
                 })();
                 break;
             case 'erase':
-                newCell.style.backgroundColor = 'white';
+                newCell.style.backgroundColor = '#eeeeee';
                 break;
             default:
                 newCell.style.backgroundColor = 'black';
