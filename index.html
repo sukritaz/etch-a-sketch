@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <h1 id="heading">
+        Etch A Sketch
+    </h1>
+    <div id="work-pad">
+        <div id="options">
+            <button id="pencil">Pencil
+            </button>
+            <button id="rainbow">Rainbow
+            </button>
+            <button id="erase">Erase
+            </button>
+            <button id="clear">Clear
+            </button>
+        </div>
+        <div id="draw-pad"> </div>
+    </div>
+    <div class="pixel-width-scroller-container">
+        <input type="range" id="scroller" min="0" max="32" step="1" value="16">
+        <div id="grid-resolution">Grid resolution is: 16</div>
+    </div>
+</body>
+
+</html>
